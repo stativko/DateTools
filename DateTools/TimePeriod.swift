@@ -493,36 +493,36 @@ open class TimePeriod: TimePeriodProtocol {
     
     // MARK: - Initializers
     
-    init() {
+    public init() {
         
     }
     
-    init(beginning: Date?, end: Date?) {
+    public init(beginning: Date?, end: Date?) {
         self.beginning = beginning
         self.end = end
     }
     
-    init(beginning: Date, duration: TimeInterval) {
+    public init(beginning: Date, duration: TimeInterval) {
         self.beginning = beginning
         self.end = beginning + duration
     }
     
-    init(end: Date, duration: TimeInterval) {
+    public init(end: Date, duration: TimeInterval) {
         self.end = end
         self.beginning = end.addingTimeInterval(-duration)
     }
     
-    init(beginning: Date, chunk: TimeChunk) {
+    public init(beginning: Date, chunk: TimeChunk) {
         self.beginning = beginning
         self.end = beginning + chunk
     }
     
-    init(end: Date, chunk: TimeChunk) {
+    public init(end: Date, chunk: TimeChunk) {
         self.end = end
         self.beginning = end - chunk
     }
     
-    init(chunk: TimeChunk) {
+    public init(chunk: TimeChunk) {
         self.beginning = Date()
         self.end = self.beginning?.add(chunk)
     }
@@ -537,7 +537,7 @@ open class TimePeriod: TimePeriodProtocol {
      *
      * - returns: The new, shifted `TimePeriod`
      */
-    func shifted(by timeInterval: TimeInterval) -> TimePeriod {
+    public func shifted(by timeInterval: TimeInterval) -> TimePeriod {
         let timePeriod = TimePeriod()
         timePeriod.beginning = self.beginning?.addingTimeInterval(timeInterval)
         timePeriod.end = self.end?.addingTimeInterval(timeInterval)
@@ -551,7 +551,7 @@ open class TimePeriod: TimePeriodProtocol {
      *
      * - returns: The new, shifted `TimePeriod`
      */
-    func shifted(by chunk: TimeChunk) -> TimePeriod {
+    public func shifted(by chunk: TimeChunk) -> TimePeriod {
         let timePeriod = TimePeriod()
         timePeriod.beginning = self.beginning?.add(chunk)
         timePeriod.end = self.end?.add(chunk)
@@ -570,7 +570,7 @@ open class TimePeriod: TimePeriodProtocol {
      *
      * - returns: The new, lengthened `TimePeriod`
      */
-    func lengthened(by timeInterval: TimeInterval, at anchor: Anchor) -> TimePeriod {
+    public func lengthened(by timeInterval: TimeInterval, at anchor: Anchor) -> TimePeriod {
         let timePeriod = TimePeriod()
         switch anchor {
         case .beginning:
@@ -598,7 +598,7 @@ open class TimePeriod: TimePeriodProtocol {
      *
      * - returns: The new, lengthened `TimePeriod`
      */
-    func lengthened(by chunk: TimeChunk, at anchor: Anchor) -> TimePeriod {
+    public func lengthened(by chunk: TimeChunk, at anchor: Anchor) -> TimePeriod {
         let timePeriod = TimePeriod()
         switch anchor {
         case .beginning:
@@ -625,7 +625,7 @@ open class TimePeriod: TimePeriodProtocol {
      *
      * - returns: The new, shortened `TimePeriod`
      */
-    func shortened(by timeInterval: TimeInterval, at anchor: Anchor) -> TimePeriod {
+    public func shortened(by timeInterval: TimeInterval, at anchor: Anchor) -> TimePeriod {
         let timePeriod = TimePeriod()
         switch anchor {
         case .beginning:
@@ -653,7 +653,7 @@ open class TimePeriod: TimePeriodProtocol {
      *
      * - returns: The new, shortened `TimePeriod`
      */
-    func shortened(by chunk: TimeChunk, at anchor: Anchor) -> TimePeriod {
+    public func shortened(by chunk: TimeChunk, at anchor: Anchor) -> TimePeriod {
         let timePeriod = TimePeriod()
         switch anchor {
         case .beginning:
@@ -678,7 +678,7 @@ open class TimePeriod: TimePeriodProtocol {
     /**
      *  Operator overload for checking if two `TimePeriod`s are equal
      */
-    static func ==(leftAddend: TimePeriod, rightAddend: TimePeriod) -> Bool {
+    public static func ==(leftAddend: TimePeriod, rightAddend: TimePeriod) -> Bool {
         return leftAddend.equals(rightAddend)
     }
     
@@ -686,14 +686,14 @@ open class TimePeriod: TimePeriodProtocol {
     /**
      *  Operator overload for lengthening a `TimePeriod` by a `TimeInterval`
      */
-    static func +(leftAddend: TimePeriod, rightAddend: TimeInterval) -> TimePeriod {
+    public static func +(leftAddend: TimePeriod, rightAddend: TimeInterval) -> TimePeriod {
         return leftAddend.lengthened(by: rightAddend, at: .beginning)
     }
     
     /**
      *  Operator overload for lengthening a `TimePeriod` by a `TimeChunk`
      */
-    static func +(leftAddend: TimePeriod, rightAddend: TimeChunk) -> TimePeriod {
+    public static func +(leftAddend: TimePeriod, rightAddend: TimeChunk) -> TimePeriod {
         return leftAddend.lengthened(by: rightAddend, at: .beginning)
     }
     
@@ -701,21 +701,21 @@ open class TimePeriod: TimePeriodProtocol {
     /**
      *  Operator overload for shortening a `TimePeriod` by a `TimeInterval`
      */
-    static func -(minuend: TimePeriod, subtrahend: TimeInterval) -> TimePeriod {
+    public static func -(minuend: TimePeriod, subtrahend: TimeInterval) -> TimePeriod {
         return minuend.shortened(by: subtrahend, at: .beginning)
     }
     
     /**
      *  Operator overload for shortening a `TimePeriod` by a `TimeChunk`
      */
-    static func -(minuend: TimePeriod, subtrahend: TimeChunk) -> TimePeriod {
+    public static func -(minuend: TimePeriod, subtrahend: TimeChunk) -> TimePeriod {
         return minuend.shortened(by: subtrahend, at: .beginning)
     }
     
     /**
      *  Operator overload for checking if a `TimePeriod` is equal to a `TimePeriodProtocol`
      */
-    static func ==(left: TimePeriod, right: TimePeriodProtocol) -> Bool {
+    public static func ==(left: TimePeriod, right: TimePeriodProtocol) -> Bool {
         return left.equals(right)
     }
     
